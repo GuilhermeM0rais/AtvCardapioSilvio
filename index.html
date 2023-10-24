@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Pedido</title>
+    <style>
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Selecione seu pedido</h1>
+
+    <label for="hamburguer">Hambúrguer:</label>
+    <select id="hamburguer">
+        <option value="0">Selecione</option>
+        <option value="1.36">X1</option>
+        <option value="2.31">X2</option>
+        <option value="2.81">X3</option>
+        <option value="3.21">X4</option>
+    </select>
+
+    <label for="acompanhamento">Acompanhamento:</label>
+    <select id="acompanhamento">
+        <option value="0">Selecione</option>
+        <option value="3.69">Nuggets</option>
+        <option value="1.58">Fritas</option>
+    </select>
+
+    <label for="bebida">Bebida:</label>
+    <select id="bebida">
+        <option value="0">Selecione</option>
+        <option value="1.48">Coca-cola</option>
+        <option value="2.58">Fanta</option>
+        <option value="0.98">Água</option>
+    </select>
+
+    <button onclick="calcularPedido()">Calcular Pedido</button>
+
+    <h2>Resumo do Pedido:</h2>
+    <p id="itensEscolhidos"></p>
+    <p id="totalPedido"></p>
+
+    <script>
+        function calcularPedido() {
+            var hamb = document.getElementById("hamburguer");
+            var acomp = document.getElementById("acompanhamento");
+            var beb = document.getElementById("bebida");
+
+            var hambValor = parseFloat(hamb.value);
+            var acompValor = parseFloat(acomp.value);
+            var bebValor = parseFloat(beb.value);
+
+            var total = hambValor + acompValor + bebValor;
+
+            var itensEscolhidos = [];
+
+            if (hambValor > 0) {
+                itensEscolhidos.push(hamb.options[hamb.selectedIndex].text);
+            }
+
+            if (acompValor > 0) {
+                itensEscolhidos.push(acomp.options[acomp.selectedIndex].text);
+            }
+
+            if (bebValor > 0) {
+                itensEscolhidos.push(beb.options[beb.selectedIndex].text);
+            }
+
+            document.getElementById("itensEscolhidos").innerText = "Itens Escolhidos: " + itensEscolhidos.join(", ");
+            document.getElementById("totalPedido").innerText = "Total do Pedido: R$ " + total.toFixed(2);
+        }
+    </script>
+</body>
+</html>
